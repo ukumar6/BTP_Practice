@@ -1,0 +1,6 @@
+---
+applications:
+  - name: anubhavfirstapp
+    memory: 256M
+    buildpacks:
+      - go_buildpack

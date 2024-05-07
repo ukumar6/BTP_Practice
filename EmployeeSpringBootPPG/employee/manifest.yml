@@ -1,0 +1,10 @@
+---
+applications:
+- name: employeespringbootppg
+  path: target\employeespringbootppg-0.0.1-SNAPSHOT.war        
+  random-route: true
+  memory: 2048m
+  buildpacks: 
+  - sap_java_buildpack
+  services:
+  - postgre
