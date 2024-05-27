@@ -1,0 +1,28 @@
+{
+    "vendors":[
+        {
+            "vendorId": 100,
+            "name":"JK Suppliers",
+            "type":"L2",
+            "location":"DL"
+        },
+        {
+            "vendorId": 101,
+            "name":"MK Suppliers",
+            "type":"L1",
+            "location":"BLR"
+        },
+        {
+            "vendorId": 102,
+            "name":"Mahadev Enterprise",
+            "type":"L2",
+            "location":"CH"
+        },
+        {
+            "vendorId": 103,
+            "name":"MR Industries",
+            "type":"L2",
+            "location":"MUM"
+        }
+    ]
+}

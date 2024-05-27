@@ -1,0 +1,342 @@
+{
+	"info": {
+		"_postman_id": "f3690a5c-d505-424a-944b-529715853aaa",
+		"name": "SAP BTP Training",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "14691148"
+	},
+	"item": [
+		{
+			"name": "Read All Vendor Data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/vendors"
+			},
+			"response": []
+		},
+		{
+			"name": "Read Single Vendor by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/vendor/9d30d0ea-54eb-4429-b839-d55eed16a493"
+			},
+			"response": []
+		},
+		{
+			"name": "Create new vendor data",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": \"\",\r\n    \"companyName\": \"SAP\",\r\n    \"contactPerson\": \"Sushma\",\r\n    \"firstName\": \"Vinutha\",\r\n    \"lastName\": \"Kottipalli\",\r\n    \"website\": \"www.sap.com\",\r\n    \"email\": \"vinutha@gmail.com\",\r\n    \"status\": 1,\r\n    \"regDate\": \"2024-01-01\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/vendors"
+			},
+			"response": []
+		},
+		{
+			"name": "Change vendor Data",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"companyName\": \"IBM incorporation\",\r\n    \"contactPerson\": \"Ananya\",\r\n    \"firstName\": \"Roger\",\r\n    \"lastName\": \"Morrison\",\r\n    \"website\": \"www.ibm.com\",\r\n    \"email\": \"roger@ibm.com\",\r\n    \"status\": 1,\r\n    \"regDate\": \"2024-02-01\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/vendor/9d30d0ea-54eb-4429-b839-d55eed16a493"
+			},
+			"response": []
+		},
+		{
+			"name": "Remove Vendor data",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"companyName\": \"IBM incorporation\",\r\n    \"contactPerson\": \"Ananya\",\r\n    \"firstName\": \"Roger\",\r\n    \"lastName\": \"Morrison\",\r\n    \"website\": \"www.ibm.com\",\r\n    \"email\": \"roger@ibm.com\",\r\n    \"status\": 1,\r\n    \"regDate\": \"2024-02-01\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/vendor/9d30d0ea-54eb-4429-b839-d55eed16a493"
+			},
+			"response": []
+		},
+		{
+			"name": "Search By Company Name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/vendor/search?company=SAP",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vendor",
+						"search"
+					],
+					"query": [
+						{
+							"key": "company",
+							"value": "SAP"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lookup employee by Email",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/vendor/lookup/gmail"
+			},
+			"response": []
+		},
+		{
+			"name": "Create vendor and address using association",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": \"\",\r\n    \"companyName\": \"SAP\",\r\n    \"contactPerson\": \"Prakash\",\r\n    \"firstName\": \"Lohit\",\r\n    \"lastName\": \"Kumar\",\r\n    \"website\": \"www.sap.com\",\r\n    \"email\": \"prakash@sap.com\",\r\n    \"status\": 1,\r\n    \"regDate\": \"2024-01-01\",\r\n    \"addresses\" :[\r\n        {\r\n            \"addressType\":\"H\",\r\n            \"street\":\"2nd Block, BEML Layout\",\r\n            \"city\": \"Bangalore\",\r\n            \"country\": \"IN\",\r\n            \"region\": \"APJ\"\r\n        },\r\n        {\r\n            \"addressType\":\"O\",\r\n            \"street\":\"Dieter Hopp Alle\",\r\n            \"city\": \"Waldorf\",\r\n            \"country\": \"DE\",\r\n            \"region\": \"EMEA\"\r\n        }\r\n    ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/vendors"
+			},
+			"response": []
+		},
+		{
+			"name": "Insert data to sap btp postgres db",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"code\": \"60b718c4-de8f-4bb4-b03d-1933a26d3e77\",\r\n        \"companyName\": \"SAP\",\r\n        \"contactPerson\": \"Sushma\",\r\n        \"firstName\": \"Vinutha\",\r\n        \"lastName\": \"Kottipalli\",\r\n        \"website\": \"www.sap.com\",\r\n        \"email\": \"vinutha@gmail.com\",\r\n        \"status\": 1,\r\n        \"regDate\": \"2024-01-01T00:00:00.000+00:00\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://dbbootbtppg-brash-reedbuck-ij.cfapps.us10-001.hana.ondemand.com/vendors"
+			},
+			"response": []
+		},
+		{
+			"name": "Create vendor and address in HANA",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"companyName\": \"IBM incorporation\",\r\n    \"contactPerson\": \"Ananya\",\r\n    \"firstName\": \"Roger\",\r\n    \"lastName\": \"Morrison\",\r\n    \"website\": \"www.ibm.com\",\r\n    \"email\": \"roger@ibm.com\",\r\n    \"status\": 1,\r\n    \"regDate\": \"2024-02-01\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://dbbootbtphana-zany-parrot-na.cfapps.us10-001.hana.ondemand.com/vendor"
+			},
+			"response": []
+		},
+		{
+			"name": "GET The data from HANA",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"1\",\r\n    \"companyName\": \"SAP\",\r\n    \"contactPerson\": \"Prakash\",\r\n    \"firstName\": \"Lohit\",\r\n    \"lastName\": \"Kumar\",\r\n    \"website\": \"www.sap.com\",\r\n    \"email\": \"prakash@sap.com\",\r\n    \"status\": 1,\r\n    \"regDate\": \"2024-01-01\",\r\n    \"addresses\" :[\r\n        {\r\n            \"addressType\":\"H\",\r\n            \"street\":\"2nd Block, BEML Layout\",\r\n            \"city\": \"Bangalore\",\r\n            \"country\": \"IN\",\r\n            \"region\": \"APJ\"\r\n        },\r\n        {\r\n            \"addressType\":\"O\",\r\n            \"street\":\"Dieter Hopp Alle\",\r\n            \"city\": \"Waldorf\",\r\n            \"country\": \"DE\",\r\n            \"region\": \"EMEA\"\r\n        }\r\n    ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://dbbootbtphana-zany-parrot-na.cfapps.us10-001.hana.ondemand.com/vendors"
+			},
+			"response": []
+		},
+		{
+			"name": "OData POST Operation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Code\":\"4\",\r\n    \"CompanyName\": \"SAP Labs\",\r\n    \"ContactPerson\": \"Sakshi\",\r\n    \"FirstName\": \"John\",\r\n    \"LastName\": \"Peter\",\r\n    \"Website\": \"www.sap.com\",\r\n    \"Email\": \"john@sap.com\",\r\n    \"Status\": 1,\r\n    \"RegDate\": \"2024-02-01T00:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "https://btpolingoodata-sleepy-sable-vp.cfapps.us10-001.hana.ondemand.com/anubhav.svc/VendorSet"
+			},
+			"response": []
+		},
+		{
+			"name": "GET OData Vendors",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Code\":\"\",\r\n    \"CompanyName\": \"SAP Labs\",\r\n    \"ContactPerson\": \"Prakash\",\r\n    \"FirstName\": \"Anurag\",\r\n    \"LastName\": \"Bajaj\",\r\n    \"Website\": \"www.sap.com\",\r\n    \"Email\": \"anurag@sap.com\",\r\n    \"Status\": 1,\r\n    \"RegDate\": \"2024-02-01T00:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://btpolingoodata-sleepy-sable-vp.cfapps.us10-001.hana.ondemand.com/anubhav.svc/VendorSet?$format=json",
+					"protocol": "https",
+					"host": [
+						"btpolingoodata-sleepy-sable-vp",
+						"cfapps",
+						"us10-001",
+						"hana",
+						"ondemand",
+						"com"
+					],
+					"path": [
+						"anubhav.svc",
+						"VendorSet"
+					],
+					"query": [
+						{
+							"key": "$format",
+							"value": "json"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OData Local",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Code\":\"1\",\r\n    \"CompanyName\": \"SAP Labs\",\r\n    \"ContactPerson\": \"Pooja\",\r\n    \"FirstName\": \"Neha\",\r\n    \"LastName\": \"Sharma\",\r\n    \"Website\": \"www.barklays.com\",\r\n    \"Email\": \"pooja@barklays.com\",\r\n    \"Status\": 1,\r\n    \"RegDate\": \"2024-02-01T00:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/anubhav.svc/VendorSet"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Vendor data from Secure end point - Authentication",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": {
+						"username": "",
+						"password": "",
+						"scope": "",
+						"clientSecret": "okmA2VArQyDGeuqLAjW/oxQh+VU=",
+						"clientId": "sb-btpolingo!t206907",
+						"accessTokenUrl": "https://1c4a28ddtrial.authentication.us10.hana.ondemand.com/oauth/token",
+						"grant_type": "password_credentials",
+						"tokenName": "AnubhavToken",
+						"client_authentication": "body",
+						"addTokenTo": "header"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "https://btpolingoodata-impressive-shark-nx.cfapps.us10-001.hana.ondemand.com/vendors"
+			},
+			"response": []
+		},
+		{
+			"name": "OData end point - Authentication + Display Scope",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": {
+						"username": "",
+						"password": "",
+						"scope": "",
+						"clientSecret": "okmA2VArQyDGeuqLAjW/oxQh+VU=",
+						"clientId": "sb-btpolingo!t206907",
+						"accessTokenUrl": "https://1c4a28ddtrial.authentication.us10.hana.ondemand.com/oauth/token",
+						"grant_type": "password_credentials",
+						"tokenName": "AnubhavToken",
+						"client_authentication": "body",
+						"addTokenTo": "header"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "https://btpolingoodata-impressive-shark-nx.cfapps.us10-001.hana.ondemand.com/anubhav.svc/"
+			},
+			"response": []
+		},
+		{
+			"name": "Accessing Fiori App - Requires Editor",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": {
+						"username": "",
+						"password": "",
+						"scope": "",
+						"clientSecret": "okmA2VArQyDGeuqLAjW/oxQh+VU=",
+						"clientId": "sb-btpolingo!t206907",
+						"accessTokenUrl": "https://1c4a28ddtrial.authentication.us10.hana.ondemand.com/oauth/token",
+						"grant_type": "password_credentials",
+						"tokenName": "AnubhavToken",
+						"client_authentication": "body",
+						"addTokenTo": "header"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "https://btpolingoodata-impressive-shark-nx.cfapps.us10-001.hana.ondemand.com/webapp/index.html"
+			},
+			"response": []
+		}
+	]
+}

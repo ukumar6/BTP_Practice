@@ -1,0 +1,122 @@
+1. Create an instance of SAP XSUAA service in BTP
+Documentation - https://help.sap.com/docs/SAP_HANA_PLATFORM/4505d0bdaf4948449b7f7379d24d0f0d/6d3ed64092f748cbac691abc5fe52985.html
+
+{
+    "xsappname": "btpolingo",
+    "scopes": [
+        {
+            "name": "$XSAPPNAME.Display",
+            "description": "display"
+        },
+        {
+            "name": "$XSAPPNAME.Edit",
+            "description": "edit"
+        }
+    ],
+    "role-templates": [
+        {
+            "name": "Viewer",
+            "description": "Allow to view the odata service",
+            "scope-references": [
+                "$XSAPPNAME.Display"
+            ]
+        },
+        {
+            "name": "Editor",
+            "description": "Access of Fiori App to edit data",
+            "scope-references": [
+                "$XSAPPNAME.Edit"
+            ]
+        }
+    ],
+    "oauth2-configuration": {
+        "token-validity": 900,
+        "refresh-token-validity": 1800,
+        "redirect-uris": [
+            "https://api.cf.us10-001.hana.ondemand.com"
+        ],
+        "autoapprove": "false"
+    },
+    "authorities": [
+        "$ACCEPT_GRANTED_AUTHORITIES"
+    ]
+}
+
+
+2. Bind the instance with our app
+3. add Dependencies 
+<sap.cloud.security.version>2.13.4</sap.cloud.security.version>
+
+        <dependency>
+			<groupId>com.sap.cloud.security.xsuaa</groupId>
+			<artifactId>xsuaa-spring-boot-starter</artifactId>
+			<version>${sap.cloud.security.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>4.3.3.RELEASE</version>
+		</dependency>
+
+4. Add security class
+
+import com.sap.cloud.security.xsuaa.XsuaaServiceConfiguration;
+import com.sap.cloud.security.xsuaa.extractor.IasXsuaaExchangeBroker;
+import com.sap.cloud.security.xsuaa.token.TokenAuthenticationConverter;
+import com.sap.cloud.security.xsuaa.tokenflows.XsuaaTokenFlows;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.security.authentication.AbstractAuthenticationToken;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+@EnableWebSecurity(debug = true) // TODO "debug" may include sensitive information. Do not use in a production
+                                 // system!
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
+public class SecurityConfiguration {
+
+    @Autowired
+    XsuaaServiceConfiguration xsuaaServiceConfiguration;
+
+    @Autowired
+    XsuaaTokenFlows xsuaaTokenFlows;
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        // @formatter:off
+        http
+                .sessionManagement(management -> management
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeRequests(requests -> requests
+                        .antMatchers("/anubhav.svc/*").hasAuthority("Display")
+                        .antMatchers("/vendor").authenticated()
+                        .anyRequest().denyAll())
+                .oauth2ResourceServer(server -> server
+                        .bearerTokenResolver(new IasXsuaaExchangeBroker(xsuaaTokenFlows))
+                        .jwt()
+                        .jwtAuthenticationConverter(getJwtAuthenticationConverter()));
+		// @formatter:on
+
+        return http.build();
+    }
+
+    /**
+     * Customizes how GrantedAuthority are derived from a Jwt
+     */
+    Converter<Jwt, AbstractAuthenticationToken> getJwtAuthenticationConverter() {
+        TokenAuthenticationConverter converter = new TokenAuthenticationConverter(xsuaaServiceConfiguration);
+        converter.setLocalScopeAsAuthorities(true);
+        return converter;
+    }
+
+}
+
+
+

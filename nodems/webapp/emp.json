@@ -1,0 +1,34 @@
+{
+    "empStr": {
+        "empId": 1005,
+        "empName": "Anubhav",
+        "salary": 45000,
+        "curr": "EUR"
+    },
+    "empTab": [
+        {
+            "empId": 9001,
+            "empName": "Sonia",
+            "salary": 35000,
+            "curr": "EUR"
+        },
+        {
+            "empId": 9002,
+            "empName": "Rockey",
+            "salary": 89000,
+            "curr": "EUR"
+        },
+        {
+            "empId": 9003,
+            "empName": "Syed",
+            "salary": 99000,
+            "curr": "AED"
+        },
+        {
+            "empId": 9004,
+            "empName": "Mathias",
+            "salary": 98500,
+            "curr": "USD"
+        }
+    ]
+}
