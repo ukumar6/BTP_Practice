@@ -19,7 +19,7 @@ type AmountT : Decimal(10, 2)@(
 // }
 
 //reusable data types
-type Guid : String(32);
+// type Guid : String(32);
 
 type PhoneNumber: String(30)@assert.format:'^(?:\+\d{1,3})?[-.\s]?\(?\d{1,4}\)?[-.\s]?\d{1,12}$';
 

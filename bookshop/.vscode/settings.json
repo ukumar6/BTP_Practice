@@ -7,13 +7,5 @@
     // "csv (semicolon)",
     // "tab",
     // "tsv"
-  ],
-  "sqltools.connections": [
-    {
-      "previewLimit": 50,
-      "driver": "SQLite",
-      "name": "rms",
-      "database": "${workspaceFolder:RMS}/db.sqlite"
-    }
   ]
 }

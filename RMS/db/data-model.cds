@@ -1,6 +1,6 @@
 namespace rms.db;
 
-using { managed } from '@sap/cds/common';
+using { managed,cuid } from '@sap/cds/common';
 using { rms.db.commons as common } from './commons';
 
 
@@ -11,15 +11,22 @@ context master {
         empPhone : common.PhoneNumber;
         empEmail : common.EmailAddress;
         currentBalance : common.AmountT;
-        transactions : Composition of many transactions on transactions.empID = $self;
+        transactions : Association to many transactions.trans on transactions.empID = $self;
     }
 
-    entity transactions : managed {
-        key transId: common.Guid;
-        empID : Association to one master;
-        transType: common.transType;
-        description: String(100);
+    entity description : managed {
+        sNo : Int16;
+        key details : String(50);
+        transactions : Association to many transactions.trans on transactions.description = $self;
+    }
+}
+context transactions {
+    entity trans : cuid, managed {
+        empID : Association to one master.master;
+        transType: String(2);
+        description: Association to one master.description;
         amount : common.AmountT;
-        balance : common.AmountT;        
+        balance : common.AmountT; 
+        comments : String(100);
     }        
 }

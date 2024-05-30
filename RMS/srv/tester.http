@@ -1,0 +1,53 @@
+### Get all employees
+http://localhost:4004/odata/v4/CatalogService/masterSet?$expand=transactions
+
+### Employee View -- Get employee by ID
+http://localhost:4004/odata/v4/CatalogService/masterSet/3win001?$expand=transactions
+
+### Employee View -- Get employee by ID
+PATCH http://localhost:4004/odata/v4/CatalogService/masterSet/3win001
+Content-Type: application/json
+
+{
+    "empPhone": "9578786999",
+    "empEmail": "udayakumar.1990@gmail.com"  
+}
+
+### Employee View -- Get employee's transactions
+http://localhost:4004/odata/v4/EmployeeService/EmployeeData/3win001?$expand=transactions
+
+### Employee View -- Patch employee's transactions
+PATCH http://localhost:4004/odata/v4/EmployeeService/RewardData/01b2a943-4b9f-49da-a5ab-5ba5108dd997
+Content-Type: application/json
+
+{
+  "amount": 11111
+}
+
+### Admin - Get all employees
+http://localhost:4004/odata/v4/CatalogService/masterSet
+
+### Admin - Post all employees
+POST http://localhost:4004/odata/v4/CatalogService/masterSet
+Content-Type: application/json
+
+{
+  "empID": "3win006",
+  "empName": "Buvanesh Kumar",
+  "empPhone": "9876541236",
+  "empEmail": "buva.1990@gmail.com",
+  "currentBalance": 0
+}
+
+### Admin - Patch employee
+PATCH http://localhost:4004/odata/v4/CatalogService/masterSet/3win006
+Content-Type: application/json
+
+{
+  "empID": "3win006",
+  "empName": "Buvanesh Kumar",
+  "empPhone": "9876541236",
+  "empEmail": "buva.1990@gmail.com",
+  "currentBalance": 0 
+}
+

@@ -12,8 +12,8 @@
     {
       "previewLimit": 50,
       "driver": "SQLite",
-      "name": "rms",
-      "database": "${workspaceFolder:RMS}/db.sqlite"
+      "name": "anubhavdb",
+      "database": "${workspaceFolder:capmapp}/db.sqlite"
     }
   ]
 }
